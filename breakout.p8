@@ -2,16 +2,55 @@ pico-8 cartridge // http://www.pico-8.com
 version 30
 __lua__
 
-function welcome()
-    print("hello world!!",100/2,128/4,8)
+-- Making a Breakout Style game in Pico-8
+
+message = ">o<"
+pos_x = 20
+pos_y = 100
+posx_speed = 2
+posy_speed = -2
+game_on = true
+color = 0
+
+function _init()
+
+
 end
 
-cls() -- clear the screen
-welcome()
+function _update()
+    pos_x += posx_speed
+    pos_y += posy_speed
+    color += 1
+    screen_check()
 
+end
 
+function _draw()
+    cls() -- clear the screen
+    welcome()
 
+end
 
+--Functions Below
+
+function welcome()-- welcome message
+    print(message,pos_x,pos_y,color)
+end
+
+function screen_check() --check to see if message leaves the screen
+    if pos_x > 120 then
+        posx_speed = -2
+    end
+    if pos_x < 0 then
+        posx_speed = 2
+    end
+    if pos_y > 120 then
+        posy_speed = -2
+    end
+    if pos_y < 0 then
+        posy_speed = 2
+    end
+end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
