@@ -1,6 +1,14 @@
 pico-8 cartridge // http://www.pico-8.com
 version 30
 __lua__
+cls() -- clear the screen
+print("never gonna give you up")
+print("never gonna let you down")
+print("never gonna run around")
+print("and desert you")
+
+print("hello world!!",100/2, 128/2, 8)
+
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
