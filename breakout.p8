@@ -4,51 +4,50 @@ __lua__
 
 -- Making a Breakout Style game in Pico-8
 
-message = ">o<"
-pos_x = 20
-pos_y = 100
-posx_speed = 2
-posy_speed = -2
+
+ball_x = 1
+ball_y = 42
+ball_dx = 2
+ball_dy = 2
+ball_r = 2
 game_on = true
-color = 0
+color = 10
 
 function _init()
-
-
+    cls()
 end
 
 function _update()
-    pos_x += posx_speed
-    pos_y += posy_speed
+    ball_x += ball_dx
+    ball_y += ball_dy
     color += 1
+    ball_r += 1
+    
     screen_check()
 
 end
 
 function _draw()
     cls() -- clear the screen
-    welcome()
+    ball()
 
 end
 
 --Functions Below
 
-function welcome()-- welcome message
-    print(message,pos_x,pos_y,color)
+function ball()
+    circfill(ball_x,ball_y,ball_r,color)
+    if ball_r == 5 then 
+        ball_r = 0
+    end
 end
 
-function screen_check() --check to see if message leaves the screen
-    if pos_x > 120 then
-        posx_speed = -2
+function screen_check() --check to see if ball leaves the screen
+    if ball_x > 127 or ball_x < 0 then
+        ball_dx = -ball_dx 
     end
-    if pos_x < 0 then
-        posx_speed = 2
-    end
-    if pos_y > 120 then
-        posy_speed = -2
-    end
-    if pos_y < 0 then
-        posy_speed = 2
+    if ball_y > 127 or ball_y <0 then
+        ball_dy = -ball_dy
     end
 end
 __gfx__
