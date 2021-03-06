@@ -3,28 +3,32 @@ version 32
 __lua__
 
 -- Making a Breakout Style game in Pico-8
-
-
+-- global variables
+    -- ball variables
 ball_x = 1
-ball_y = 42
+ball_y = 33
 ball_dx = 2
 ball_dy = 2
 ball_r = 2
-game_on = true
-color = 10
---frame = 0
+ball_r - 0.4
+    --paddle variables
+pad_x = 52
+pad_dx = 0
+pad_y = 120
+pad_w = 24
+pad_h = 3
+pad_speed = 1
 
 function _init()
     cls()
 end
 
 function _update()
-    --frame += 1
-    ball_x += ball_dx
-    ball_y += ball_dy
-    --ball_r = 2+(sin(frame/10))*2 --pulsating ball
+    
+    ball_move()
     ball_check()
-
+    pad_move()
+    
 end
 
 function _draw()
@@ -32,15 +36,19 @@ function _draw()
     screen_background()
 
     ball()
+    paddle()
 
 end
 
---Functions Below
+--User Created Functions Below
 
 function ball()
-    circfill(ball_x,ball_y,ball_r,color)
+    circfill(ball_x,ball_y,ball_r,7)
 end
-
+function ball_move()
+    ball_x += ball_dx
+    ball_y += ball_dy
+end
 function ball_check
     () --check to see if ball leaves the screen
     if ball_x > 127 or ball_x < 0 then
@@ -52,12 +60,35 @@ function ball_check
         sfx(0)
     end
 end
-
 function screen_background()
     rectfill(0,0,127,127,1)
     
 
 end
+function paddle()
+    rectfill(pad_x,pad_y,(pad_x + pad_w),(pad_y + pad_h),14)
+
+end
+function pad_move()
+    buttpress = false
+    if btn(0) then --Left
+        pad_dx -= pad_speed
+        buttpress = true
+    end
+    
+    if btn(1) then --Right
+        pad_dx += pad_speed
+        buttpress = true
+    end
+    if not(buttpress) then
+        pad_dx /= 1.5 --floaty
+    end
+    pad_x += pad_dx
+end
+
+
+
+---NOTHING BELOW THIS--
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
