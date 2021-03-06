@@ -10,7 +10,7 @@ ball_y = 33
 ball_dx = 2
 ball_dy = 2
 ball_r = 2
-ball_dr - 0.4
+ball_dr = 0.4
     --paddle variables
 pad_x = 52
 pad_dx = 0
