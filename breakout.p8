@@ -52,6 +52,7 @@ end
 function ball_box(box_x, box_y,box_w,box_h)
     if (ball_y - ball_r) > (box_y + box_h) then
         print("test")
+    end
     return false
 end
 function ball_check() --check to see if ball leaves the screen
