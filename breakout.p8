@@ -3,25 +3,27 @@ version 32
 __lua__
 
 -- Making a Breakout Style game in Pico-8
--- global variables
-    -- ball variables
-ball_x = 1
-ball_y = 33
-ball_dx = 2
-ball_dy = 2
-ball_r = 2
-ball_dr = 0.4
-    --paddle variables
-pad_x = 52
-pad_dx = 0
-pad_y = 120
-pad_w = 24
-pad_h = 3
-pad_c = 14
-pad_speed = 1
+
 
 function _init()
     cls()
+    -- global variables 
+    -- ball variables
+    ball_x = 1
+    ball_y = 33
+    ball_dx = 2
+    ball_dy = 2
+    ball_r = 2
+    ball_dr = 0.4
+        --paddle variables
+    pad_x = 52
+    pad_dx = 0
+    pad_y = 120
+    pad_w = 24
+    pad_h = 3
+    pad_c = 14
+    pad_speed = 1
+    
 end
 
 function _update()
@@ -79,7 +81,8 @@ function ball_check() --check to see if ball leaves the screen
     end
     if ball_box(pad_x, pad_y, pad_w, pad_h) then
         --collsion with paddle check
-        printh("collision")
+        ball_dy = -ball_dy
+        sfx(1)
     end
 end
 
@@ -93,7 +96,7 @@ function paddle()
 
 end
 function pad_move()
-    buttpress = false
+    local buttpress = false --variables are global unless you state they are "local"
     if btn(0) then --Left
         pad_dx -= pad_speed
         buttpress = true
@@ -121,4 +124,4 @@ __gfx__
 00700700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 __sfx__
 000100001835018340183301832018310113001330000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00010000000000910012100161001a1001d1001f1002110023100241002610027100291002810025100201000d10006100041000310002100011000110001100041000b1000d1000d10002100001000000000000
+000100002305023040230302302023010230001f1002110023100241002610027100291000505025100201000d10006100041000310002100011000110001100041000b1000d1000d10002100001000000000000
