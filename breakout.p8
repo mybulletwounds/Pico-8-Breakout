@@ -17,6 +17,7 @@ pad_dx = 0
 pad_y = 120
 pad_w = 24
 pad_h = 3
+pad_c = 14
 pad_speed = 1
 
 function _init()
@@ -50,15 +51,26 @@ function ball_move()
     ball_y += ball_dy
 end
 function ball_box(box_x, box_y,box_w,box_h)
+    -- checks collision of ball and paddle
     if (ball_y - ball_r) > (box_y + box_h) then
-        print("test")
+        return false
     end
-    return false
+    if (ball_y + ball_r) < (box_y) then
+        return false
+    end
+    if (ball_x - ball_r) > (box_x + box_w) then
+        return false
+    end
+    if (ball_x + ball_r) < (box_x) then
+        return false
+    end
+
+    return true
 end
 function ball_check() --check to see if ball leaves the screen
     if ball_x > 127 or ball_x < 0 then
         ball_dx = -ball_dx
-        sfx(0) 
+        sfx(0)
     end
     
     if ball_y > 127 or ball_y <0 then
@@ -66,7 +78,8 @@ function ball_check() --check to see if ball leaves the screen
         sfx(0)
     end
     if ball_box(pad_x, pad_y, pad_w, pad_h) then
-        --something
+        --collsion with paddle check
+        printh("collision")
     end
 end
 
@@ -76,7 +89,7 @@ function screen_background()
 
 end
 function paddle()
-    rectfill(pad_x,pad_y,(pad_x + pad_w),(pad_y + pad_h),14)
+    rectfill(pad_x,pad_y,(pad_x + pad_w),(pad_y + pad_h),pad_c)
 
 end
 function pad_move()
